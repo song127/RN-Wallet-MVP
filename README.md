@@ -39,27 +39,21 @@
 ```
 app/
  ┣ components/   # 공통 및 도메인별 UI 컴포넌트
- ┃ ┣ common/     # 범용 UI(로딩, 스피너 등)
+ ┃ ┣ common/     # 범용 UI(스피너, 버튼 등)
  ┃ ┗ wallet/     # 지갑 관련 UI(토큰, NFT 등)
- ┣ config/       # 네트워크, 토큰, 기능 플래그 등 앱 설정
+ ┣ config/       # 네트워크, 토큰, 키체인 플래그 등 앱 설정
  ┃ ┗ featureFlags/ # 기능 플래그(실험적 기능 on/off)
  ┣ domain/       # 비즈니스 도메인(순수 로직)
- ┃ ┣ events/     # 도메인 이벤트
  ┃ ┣ models/     # 도메인 모델(NFT, 토큰 등)
  ┃ ┣ ports/      # 추상 인터페이스(포트)
- ┃ ┗ services/   # 도메인 서비스(비즈니스 로직)
  ┣ hooks/        # 커스텀 React 훅(잔고, 가격, NFT 등)
  ┣ infra/        # 외부 시스템 연동(어댑터)
  ┃ ┗ adapters/   # 도메인 포트 구현체
  ┣ navigation/   # 네비게이션(라우팅) 관련 코드
- ┣ plugins/      # 플러그인 시스템 및 예시 플러그인
  ┣ screens/      # 주요 기능별 화면(페이지)
  ┣ stores/       # 상태 관리(zustand)
  ┗ utils/        # 유틸리티 함수
 ```
-
-- **Hexagonal(포트-어댑터) + 플러그인 확장** 패턴 기반
-- 도메인, 인프라, UI, 확장 기능이 명확히 분리되어 유지보수/확장 용이
 
 ---
 
@@ -83,5 +77,3 @@ npm start   # 또는 npx expo start
 
 - **zustand** 기반 단일 소스, 예측 가능한 뮤테이션
 - 비동기 상태는 `idle | loading | success | error` 등 명시적 관리
-
----
