@@ -5,8 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { OnboardingStackParamList } from "@/screens/Onboarding/OnboardingStack";
 import { ONBOARDING_STACK } from "@/navigation/routes";
-import SolidRectButton from "@/app/screens/components/SolidRecButton";
-import RectButton from "@/app/screens/components/RectButton";
+import SolidRectButton from "@/app/components/common/SolidRecButton";
+import RectButton from "@/app/components/common/RectButton";
 
 export default function WelcomeScreen() {
   const navigation =

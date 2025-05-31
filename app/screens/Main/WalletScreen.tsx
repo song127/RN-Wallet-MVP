@@ -32,18 +32,15 @@ import NetworkSelector from "@/components/wallet/NetworkSelector";
 import useEthBalance from "@/hooks/useEthBalance";
 import useEthUsdPrice from "@/hooks/useEthUsdPrice";
 import useNfts from "@/hooks/useNfts";
-import { LoadingWrapper } from "@/components/common/LoadingWrapper";
 import { renderIcon } from "@/app/utils/helpers";
 import * as Keychain from "react-native-keychain";
 import { KEYCHAIN_KEYS } from "@/config/keychain";
-import { TokenConfig, TOKENS } from "@/config/tokens";
+import { TOKENS } from "@/config/tokens";
 import type { SupportedNetworkId } from "@/config/networks";
 import { Token } from "@/app/domain/models/token";
 import { useAllTokenBalances } from "@/hooks/useAllTokenBalances";
 
 const NETWORK_OPTIONS = getNetworkOptions();
-const ETH_ICON_URL =
-  "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png";
 
 type Nft = {
   id?: { tokenId: string };
@@ -63,11 +60,6 @@ export default function WalletScreen() {
   const [tab, setTab] = useState<"token" | "nft">("token");
   const [tabAnim] = useState(new Animated.Value(0));
   const address = useWalletStore((s) => s.address);
-  const [networkInfo, setNetworkInfo] = useState<{
-    name: string;
-    chainId: number;
-    latestBlock: number;
-  } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [isPageFocusRefreshing, setIsPageFocusRefreshing] = useState(false);
   const network = getNetworkByKey(networkKey);
@@ -89,11 +81,7 @@ export default function WalletScreen() {
       ? (parseFloat(ethBalance) * ethUsdPrice).toFixed(2)
       : null;
   const tokens = TOKENS[networkKey as SupportedNetworkId] || [];
-  const { balances, loading: loadingTokenBalances } = useAllTokenBalances(
-    address,
-    tokens,
-    network?.rpcUrl
-  );
+  const { balances } = useAllTokenBalances(address, tokens, network?.rpcUrl);
 
   useEffect(() => {
     const loadSavedNetwork = async () => {
@@ -131,17 +119,10 @@ export default function WalletScreen() {
         const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
         const net = await provider.getNetwork();
         const blockNumber = await provider.getBlockNumber();
-        setNetworkInfo({
-          name: net.name,
-          chainId: Number(net.chainId),
-          latestBlock: blockNumber,
-        });
-      } else {
-        setNetworkInfo(null);
       }
       await refreshNfts();
     } catch (e) {
-      setNetworkInfo(null);
+      // ignore
     } finally {
       setRefreshing(false);
     }
@@ -155,24 +136,9 @@ export default function WalletScreen() {
         setIsPageFocusRefreshing(true);
         setRefreshing(true);
         try {
-          const rpcUrl = network.rpcUrl;
-          if (rpcUrl) {
-            const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
-            const net = await provider.getNetwork();
-            const blockNumber = await provider.getBlockNumber();
-            if (isActive) {
-              setNetworkInfo({
-                name: net.name,
-                chainId: Number(net.chainId),
-                latestBlock: blockNumber,
-              });
-            }
-          } else {
-            if (isActive) setNetworkInfo(null);
-          }
           await refreshNfts();
         } catch (e) {
-          if (isActive) setNetworkInfo(null);
+          // ignore
         } finally {
           if (isActive) {
             setIsPageFocusRefreshing(false);

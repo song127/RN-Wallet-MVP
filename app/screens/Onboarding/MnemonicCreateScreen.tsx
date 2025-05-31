@@ -17,8 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useWalletStore } from "@/stores/walletStore";
 import * as Clipboard from "expo-clipboard";
 import { ONBOARDING_STACK } from "@/navigation/routes";
-import RectButton from "@/app/screens/components/RectButton";
-import { LoadingWrapper } from "@/app/components/common/LoadingWrapper";
+import RectButton from "@/app/components/common/RectButton";
 
 export default function MnemonicCreateScreen() {
   const navigation =

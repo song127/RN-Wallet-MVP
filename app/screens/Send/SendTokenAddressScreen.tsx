@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import type { HomeStackParamList } from "@/navigation/MainStack";
 import { HOME_STACK } from "@/app/navigation/routes";
-import RectButton from "@/app/screens/components/RectButton";
+import RectButton from "@/app/components/common/RectButton";
 
 export default function SendTokenAddressScreen() {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();

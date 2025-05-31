@@ -7,7 +7,7 @@ import { useOnboardingStore } from "@/stores/onboardingStore";
 import { useWalletStore } from "@/stores/walletStore";
 import { getSupportedNetworks } from "@/utils/networkUtils";
 import { ROOT_STACK, HOME_STACK } from "@/navigation/routes";
-import MenuButton from "@/screens/components/MenuButton";
+import MenuButton from "@/app/components/common/MenuButton";
 
 export default function MenuScreen() {
   const navigation = useNavigation();

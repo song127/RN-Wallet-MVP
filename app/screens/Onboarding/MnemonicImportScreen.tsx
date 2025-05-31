@@ -17,7 +17,7 @@ import { useOnboardingStore } from "@/stores/onboardingStore";
 import { useWalletStore } from "@/stores/walletStore";
 import { ethers } from "ethers";
 import { ONBOARDING_STACK } from "@/navigation/routes";
-import RectButton from "@/app/screens/components/RectButton";
+import RectButton from "@/app/components/common/RectButton";
 
 const WORD_COUNT = 12;
 

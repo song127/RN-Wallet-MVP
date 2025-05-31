@@ -19,7 +19,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ROOT_STACK } from "@/navigation/routes";
 import { Ionicons } from "@expo/vector-icons";
 import { KEYCHAIN_KEYS } from "@/app/config/keychain";
-import RectButton from "@/app/screens/components/RectButton";
+import RectButton from "@/app/components/common/RectButton";
 
 export default function PinSetupScreen() {
   const [pin, setPin] = useState("");
